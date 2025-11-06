@@ -2,15 +2,17 @@ Config = {}
 
 
 -- Generelt
+
 Config.Locale = "no"
 Config.Debug = true
 Config.NightStart = 22
 Config.NightEnd = 4
 Config.CheckInterval = 1000
 Config.FadeIn = true
-Config.SoundRange = 25.0      -- rekkevidde for lyd
-Config.SoundVolume = 0.4      -- volum (0.0–1.0)
-Config.GhostLifetime = 12     -- sekunder spøkelse varer
+Config.SoundRange = 25.0        -- rekkevidde for lyd
+Config.SoundVolume = 0.4        -- volum (0.0–1.0)
+Config.GhostLifetime = 10000      -- sekunder spøkelse varer
+Config.GhostChance = 100        -- sjanse (1–100) for at et spøkelse spawner
 
 
 -- Prester
@@ -24,7 +26,7 @@ Config.Priests = {
         sound = "priest",
         notify = {
             title = "Advarsel",
-            description = "Du bør ikke være her etter mørkets frembrudd, sønn...",
+            description = "Du bør ikke være her etter mørkets frembrudd..",
             type = "warning",
             duration = 7000
         }
@@ -44,50 +46,51 @@ Config.Priests = {
     }
 }
 
--- Ghosts Spøkelser
+
+--Spøkelser
 
 Config.Ghosts = {
     {
         name = "Valentine Graveyard",
-        coords = vector3(-238.14, 819.04, 123.92),
-        model = "U_M_M_AsbSheriff_01",
-        radius = 2.0,
+        coords = vector3(-228.09, 824.71, 124.43),
+        model = "A_M_M_Rancher_01",
+        radius = 8.0,
         sound = "ghost_whisper1",
         notify = {
             title = "Spøkelse",
             description = "Du hører hvisking i vinden...",
             type = "inform",
-            duration = 7500
+            duration = 8000
         }
     },
     {
         name = "Blackwater Graveyard",
         coords = vector3(-1014.05, -1194.79, 59.45),
-        model = "U_M_M_AsbSheriff_01",
-        radius = 2.0,
+        model = "A_M_M_Rancher_01",
+        radius = 8.0,
         sound = "ghost_whisper1",
         notify = {
             title = "Spøkelse",
             description = "Stemmer visker mellom gravene...",
             type = "inform",
-            duration = 7500
+            duration = 8000
         }
     }
 }
 
---  Haunted (hjemsøkte plasser)
+-- Haunted (hjemsøkte plasser)
 
 Config.Haunted = {
     {
-        name = "Valentine Woods", -- der ketil tok me like te rockis
+        name = "Valentine Woods",  -- der Ketil tok med like til Rockis
         coords = vector3(-613.36, 528.34, 94.62),
-        radius = 3.0,
+        radius = 4.0,
         sound = "woman_cry",
         notify = {
-            title = "???",
-            description = "Du hører en kvinne gråte svakt i mørket...",
+            title = "Sykdom?",
+            description = "En kvinne gråter svakt i mørket hennes mann har gått vekk..",
             type = "error",
-            duration = 8000
+            duration = 9000
         }
     },
     {
@@ -99,7 +102,8 @@ Config.Haunted = {
             title = "???",
             description = "En sørgmodig stemme ekkoer mellom trærne...",
             type = "error",
-            duration = 8000
+            duration = 9000
         }
     }
 }
+

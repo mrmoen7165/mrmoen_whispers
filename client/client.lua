@@ -32,40 +32,60 @@ local function playSound(sound)
 end
 
 
--- Spawn ghost ped Spøkelses peds
+
+-- Spawn ghost ped
 
 local function spawnGhost(model, coords)
     debugPrint(("Forsøker å spawne ghost: %s @ %.2f %.2f %.2f"):format(model, coords.x, coords.y, coords.z))
     local hash = GetHashKey(model)
     RequestModel(hash)
     while not HasModelLoaded(hash) do Wait(10) end
-
-    local ghost = CreatePed(hash, coords.x, coords.y, coords.z, 0.0, false, true)
-    if not DoesEntityExist(ghost) then
-        debugPrint("FEIL: Klarte ikke lage ghost-ped")
-        return
+    local ped = CreatePed(hash, coords.x, coords.y, coords.z - 1.0, 0, false, false, 0, 0)
+    entety = IsEntityAPed(ped)
+    print(entety)
+    if not DoesEntityExist(ped) then
+        debugPrint("FEIL: CreatePed returnerte null, prøver fallback-native...")
+        ped = Citizen.InvokeNative(0xD49F9B0955C367DE, hash, coords.x, coords.y, coords.z - 1.0,
+            math.random(0, 360), true, false, 0, 0, 0)
     end
+    if DoesEntityExist(ped) then
+        Citizen.InvokeNative(0x283978A15512B2FE, ped, true)
+        PlaceEntityOnGroundProperly(ped, true)
+        SetPedRandomComponentVariation(ped, 0)
+        SetEntityVisible(ped, true)
+        SetEntityDynamic(ped, true)
+        SetEntityAlpha(ped, 0, false)
+        SetEntityInvincible(ped, true)
+        SetBlockingOfNonTemporaryEvents(ped, true)
+        SetPedCanBeTargetted(ped, false)
+        SetPedCanRagdoll(ped, false)
+        SetEntityCanBeDamaged(ped, false)
+        FreezeEntityPosition(ped, false)
+        SetModelAsNoLongerNeeded(hash)
+        local heading = GetEntityHeading(ped)
+        SetEntityHeading(ped, heading + 160.0)
 
-    SetEntityAlpha(ghost, 100, false)
-    SetEntityInvincible(ghost, true)
-    SetBlockingOfNonTemporaryEvents(ghost, true)
-    SetPedCanRagdoll(ghost, false)
-
-    for i = 0, 100, 10 do
-        SetEntityAlpha(ghost, i, false)
-        Wait(100)
+        for alpha = 0, 160, 20 do
+            SetEntityAlpha(ped, alpha, false)
+            Wait(100)
+        end
+        debugPrint("Ghost er nå synlig!")
+        local player = PlayerPedId()
+        TaskGoToEntity(ped, player, -1, 1.5, 0.3, 0, 0)
+        Wait(Config.GhostLifetime)
+        for alpha = 160, 0, -20 do
+            SetEntityAlpha(ped, alpha, false)
+            Wait(100)
+        end
+        DeleteEntity(ped)
+        debugPrint("Ghost slettet igjen")
+    else
+        debugPrint("FEIL: Klarte ikke lage ghost-ped etter begge metoder.")
     end
-
-    Wait(Config.GhostLifetime * 1000)
-
-    for i = 100, 0, -10 do
-        SetEntityAlpha(ghost, i, false)
-        Wait(100)
-    end
-
-    DeleteEntity(ghost)
-    debugPrint("Ghost slettet igjen")
 end
+
+
+
 
 
 --Prester
