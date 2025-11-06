@@ -2,7 +2,7 @@
 
 Et stemningsfylt RedM-script for RSGCore som bringer liv (og død) til kirkegårder og skoger.  
 Spillere kan oppleve spøkelser, hvisking, tåke, vind og en gråtende kvinne i mørket.  
-Utviklet og eid av **MrMoen** 👻
+
 
 ---
 
