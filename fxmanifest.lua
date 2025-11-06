@@ -2,8 +2,8 @@ fx_version 'cerulean'
 game 'rdr3'
 rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aware my resources *will* become incompatible once RedM ships.'
 author 'MrMoen'
-description 'mrmoen_whispers - Dynamic graveyard & forest hauntings for RedM (RSGCore)'
-version '1.0.5'
+description 'mrmoen_whispers graveyard & forest hauntings for RedM (RSGCore)'
+version '1.0.6'
 
 shared_script '@ox_lib/init.lua'
 

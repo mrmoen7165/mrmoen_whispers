@@ -5,9 +5,7 @@ end)
 
 
 
-
-
--- Versjons-sjekk system for mrmoen_whispers
+-- Versjons-sjekk
 local currentVersion = GetResourceMetadata(GetCurrentResourceName(), 'version', 0)
 local resourceName = GetCurrentResourceName()
 local githubVersionURL = "https://raw.githubusercontent.com/mrmoen7165/mrmoen_whispers/main/fxmanifest.lua"
