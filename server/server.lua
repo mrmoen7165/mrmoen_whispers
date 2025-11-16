@@ -4,6 +4,30 @@ AddEventHandler('mrmoen_whispers:playSound', function(distance, soundFile, volum
 end)
 
 
+-- 🌑 Silent Grove Startup Banner – mrmoen_whispers
+CreateThread(function()
+    Wait(600)
+
+    local res = GetCurrentResourceName()
+    local version = GetResourceMetadata(res, "version", 0) or "?.?.?"
+
+    print([[
+
+^5≣≣≣^7  M R M O E N _ W H I S P E R S  ^5≣≣≣
+^8      Echoes • Graves • Silent Woods
+
+^1•^7  A presence follows in the dark...  ^1•
+
+^7            Utviklet av ^1MrMoen
+^7            Versjon: ^3]] .. version .. [[
+    
+^5──^7  “Every whisper has a source…”  ^5──^7
+
+    ]])
+end)
+
+
+
 
 -- Versjons-sjekk
 local currentVersion = GetResourceMetadata(GetCurrentResourceName(), 'version', 0)
